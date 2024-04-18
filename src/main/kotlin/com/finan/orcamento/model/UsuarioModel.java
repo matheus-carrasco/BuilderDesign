@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name="usuario")
 public class UsuarioModel implements Serializable {

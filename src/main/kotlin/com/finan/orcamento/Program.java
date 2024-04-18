@@ -1,13 +1,11 @@
 package com.finan.orcamento;
 
-import com.finan.orcamento.model.OrcamentoModel;
-import com.finan.orcamento.model.OrcamentoModelProxy;
-import com.finan.orcamento.model.UsuarioModel;
+import com.finan.orcamento.model.Casa2Quartos;
+import com.finan.orcamento.model.BuilderCasa;
+import com.finan.orcamento.model.Casa;
+import com.finan.orcamento.model.Casa2Quartos2BanheiroChurrasqueira;
 
-import java.math.BigDecimal;
 import java.util.Locale;
-
-import static com.finan.orcamento.model.enums.IcmsEstados.ICMS_MG;
 
 public class Program {
 
@@ -15,29 +13,28 @@ public class Program {
 
         Locale.setDefault(Locale.US);
 
-        /*Para evitar a repetição de código, a simulação de atraso de 5seg com o banco de dados foi acrescentado no
-        método toString da classe OrcamentoModel e UsuarioModel e não nos métodos get das classes
+        BuilderCasa builderCasa1 = new Casa2Quartos();
+        builderCasa1.buildQuartos();
+        builderCasa1.buildBanheiros();
+        builderCasa1.buildChurrasqueira();
+        Casa casa1 = builderCasa1.getCasa();
 
-        Não entendi o que foi pedido nas variaveis de teste = valorOrcamento, qtdItens e descontoOrcamento
-        visto que não há essas variaveis no curso pré-realizado de Spring Boot com CRUD e Design Patterns
-        */
+        System.out.println("Casa 1:");
+        System.out.println("Quartos: " + casa1.getQuartos());
+        System.out.println("Banheiros: " + casa1.getBanheiros());
+        System.out.println("Churrasqueira: " + casa1.isChurrasqueira());
 
-        OrcamentoModel orcamentoModel = new OrcamentoModel();
-        OrcamentoModelProxy proxy;
+        System.out.println("--------------------------------------------");
 
-        orcamentoModel.setId(1L);
-        orcamentoModel.setIcmsEstados(ICMS_MG);
-        orcamentoModel.setValorOrcamento(new BigDecimal("1000.00"));
-        orcamentoModel.setValorICMS(orcamentoModel.calcularIcms());
-        orcamentoModel.setUsuario(new UsuarioModel(1L, "Matheus Carrasco"));
+        BuilderCasa builderCasa2 = new Casa2Quartos2BanheiroChurrasqueira();
+        builderCasa2.buildQuartos();
+        builderCasa2.buildBanheiros();
+        builderCasa2.buildChurrasqueira();
+        Casa casa2 = builderCasa2.getCasa();
 
-        proxy = new OrcamentoModelProxy(orcamentoModel);
-
-        System.out.println("Com atraso:: " + orcamentoModel);
-        //segunda chamada apenas para visualizar o atraso
-        System.out.println("Com atraso:: " + orcamentoModel);
-
-        //chamada sem atraso
-        System.out.println("Sem atraso:: " + proxy);
+        System.out.println("Casa 2:");
+        System.out.println("Quartos: " + casa2.getQuartos());
+        System.out.println("Banheiros: " + casa2.getBanheiros());
+        System.out.println("Churrasqueira: " + casa2.isChurrasqueira());
     }
 }
